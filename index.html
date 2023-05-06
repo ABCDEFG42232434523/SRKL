@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>生日快乐</title>
+    
+
+    <!--CSS-->
+    <style>
+        #KanShi_DIV {
+            background-color: gray;
+            width: 50%;
+            height: 100pt;
+            margin: auto;
+            
+        }
+
+        #SRKL_DIV {
+            background-color: white;
+            width: 70% - 1%;
+            height: 100pt;
+            margin: auto;
+            display: none;
+        }
+        p {
+            color: red;
+            margin: auto;
+        }
+
+        h1 {
+            color: rgb(255, 0, 250);
+        }
+    </style>
+    <!--CSS-->
+    <!--JavaScript-->
+    <script>
+        // 创建颜色数组，存储背景颜色的RGB颜色值
+        let BackGroundColor = new Array(3)
+        // 初始化数组的值
+        BackGroundColor[0] = 150
+        BackGroundColor[1] = 150
+        BackGroundColor[2] = 150
+        
+        let increase = true
+        let BG = true
+        let Code = "KanShi_DIV"
+
+        // 每 25毫秒执行这个函数
+        function BackGround() {
+            if (BG) {
+                BG1()
+            }
+            else {
+                BG2()
+            }
+
+            setTimeout("BackGround()", 25)
+        }
+
+        function BG1() {
+            if (increase) {
+                for (let j = 0; j < BackGroundColor.length; j++) {
+                    if (BackGroundColor[j] >= 180) {
+                        increase = false
+                        break
+                    }
+                    BackGroundColor[j]++
+                }
+            }
+            else {
+                for (let j = 0; j < BackGroundColor.length; j++) {
+                    if (BackGroundColor[j] <= 50) {
+                        increase = true
+                        break
+                    }
+                    BackGroundColor[j]--
+                }
+            }
+            document.getElementById(Code).style.backgroundColor = "rgb("+BackGroundColor[0]+", "+BackGroundColor[1]+", "+BackGroundColor[2]+")"
+        }
+        function BG1() {
+            if (increase) {
+                for (let j = 0; j < BackGroundColor.length; j++) {
+                    if (BackGroundColor[j] >= 180 && j !== 1) {
+                        increase = false
+                        break
+                    }
+                    if (j !== 1) BackGroundColor[j]++
+                }
+            }
+            else {
+                for (let j = 0; j < BackGroundColor.length; j++) {
+                    if (BackGroundColor[j] <= 50  && j !== 1) {
+                        increase = true
+                        break
+                    }
+                    if (j !== 1) BackGroundColor[j]--
+                }
+            }
+            document.getElementById(Code).style.backgroundColor = "rgb("+BackGroundColor[0]+", "+BackGroundColor[1]+", "+BackGroundColor[2]+")"
+        }
+    </script>
+</head>
+<!--Body页面-->
+<body id="BackGround">
+
+    <div class="SRKL_DIV" id="SRKL_DIV">
+        <h1>温千怡，祝你，生日快乐!</h1>
+        <img src="https://img95.699pic.com/for_360_sitemap_imgs/004/01/46/54/50.png" width="400" height="400">
+        
+    </div>
+
+    <div id="KanShi_DIV">
+        <label>请选择你的生日：<input type="date" id="Date"></label>
+        <button class="OK!" id="btu-ok" onclick="Code = 'SRKL_DIV'; BG = false">OK!</button>
+        <p id="Text"></p>
+    </div>
+
+
+    <!--JavaScript-->
+    <script> 
+        BackGround()
+        document.getElementById("btu-ok").onclick = () => {
+            // 显示文本
+            if (document.getElementById("Date").value === "2023-05-06") {
+                document.getElementById("SRKL_DIV").style.display = "block"
+                document.getElementById("KanShi_DIV").style.display = "none"
+            }
+            else {
+                document.getElementById("Text").innerHTML = "生日不正确哦~"
+            }
+        }
+    </script>
+
+</body>
+</html>
